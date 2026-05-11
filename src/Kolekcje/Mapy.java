@@ -26,6 +26,7 @@ public class Mapy {
 
         /*--------------------------.clear(), czyli czyszczenie--------------------------*/
         //this.mapka.clear();
+        //żeby było widać co robią pętle
     }
 
     public void petlePoMapie(){
