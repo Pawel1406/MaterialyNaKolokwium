@@ -83,7 +83,7 @@ public class Lista {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main() throws FileNotFoundException {
         ReaderFromFIle readerFromFile=new ReaderFromFIle();
         readerFromFile.fromCsv("src/Pliki/plik.txt");
 

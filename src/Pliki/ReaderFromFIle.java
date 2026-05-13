@@ -16,8 +16,10 @@ public class ReaderFromFIle {
     /*--------------------------Główna metoda pobierająca z pliku--------------------------*/
     public List<Person> fromCsv(String path) throws FileNotFoundException {
         Scanner scanner=new Scanner(new File(path));//Scanner rzuca wyjątek FileNotFoundException
-        scanner.nextLine();//Bardzo ważne, żeby sprawdzić, czy nagłówek jest, czy nie, bo on zawsze psuje.
+        scanner.nextLine();//Bardzo ważne, żeby sprawdzić, czy nagłówek jest, czy nie, bo on prawie zawsze psuje.
         String line;
+        //w odróżnieniu od C++ .hasNextLine() zwraca true jeśli jest następna linia do pobrania
+        //Wskaźnik linii pliku przesuwa dopiero metoda .nextLine()
         while (scanner.hasNextLine()){
             line=scanner.nextLine();
             lista.add(fromCsvLine(line));
@@ -30,9 +32,10 @@ public class ReaderFromFIle {
     private Person fromCsvLine(String line){
         String [] parts=line.trim().split(" ");//.trim() usuwa białe znaki, split zwraca tablicę string podzieloną na podstawie regexu
         return new Person(parts[0],Integer.parseInt(parts[1]));
+        //Integer.parseInt() zamienia string na int
     }
 
-    public static void main(String[] args)  {
+    public static void main()  {
         try{
         ReaderFromFIle readerFromFIle=new ReaderFromFIle();
         readerFromFIle.fromCsv("src/Pliki/plik.txt");

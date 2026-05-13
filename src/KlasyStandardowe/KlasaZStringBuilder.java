@@ -1,7 +1,7 @@
 package KlasyStandardowe;
 
 public class KlasaZStringBuilder {
-    public static void main(String[] args) {
+    public static void main() {
         /*--------------------------StringBuileder->modyfikowalny--------------------------*/
         StringBuilder s = new StringBuilder();
         s.append("Ala");

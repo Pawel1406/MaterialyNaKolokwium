@@ -1,7 +1,7 @@
 package KlasyStandardowe;
 
 public class IntegerNaInt {
-    static void main() {
+    public static void main() {
         int a=10;
         Integer i=new Integer(10);
 

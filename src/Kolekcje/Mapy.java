@@ -46,7 +46,7 @@ public class Mapy {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         Mapy myMap=new Mapy();
         myMap.metodyNaMapie();
         System.out.println("\n");

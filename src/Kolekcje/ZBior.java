@@ -31,7 +31,7 @@ public class ZBior {
         //musi być nadpisana w klasie metoda .equals(), bo domyślnie porównuje po adresach
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         ZBior zbior = new ZBior();
         zbior.MetodyNaZbiorze();
         for (Integer i : zbior.mapka) {

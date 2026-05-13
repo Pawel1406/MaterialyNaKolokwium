@@ -17,7 +17,7 @@ public abstract class Animal {
         return "Nothing";
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         /*--------------------------POLIMORFIZM--------------------------*/
         Cat cat1=new Cat(10,1000009);
 
