@@ -4,8 +4,13 @@ public class Dostepnosc {
     public int a;
     private int b;
     protected int c;
-    int d;
+    int d;//package, nie piszemy jawnie
+    //zmienne statyczne mają wartość dla całej klasy, nie tylko dla konkretnego obiektu
+    //przy ich pomocy możemy zapisywać informację, czy na przykład wywołaliśmy już jakąś metodę, niezależnie w jakim obiekcie tej klasy
     public static int e;
+
+    //zmienne typu final są inicjowane albo tutaj, albo w konstruktorze
+    //nie mogą byc nidzie indziej zmieniane
     public final int f;
 
     public Dostepnosc(int a, int b, int c, int d,int e,int f) {
@@ -16,6 +21,8 @@ public class Dostepnosc {
         this.e=e;
         this.f=f;
     }
+
+    /*--------------------------Gettery i Settery--------------------------*/
 
     public int getA() {
         return a;

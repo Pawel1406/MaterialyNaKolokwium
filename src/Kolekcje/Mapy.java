@@ -1,7 +1,11 @@
 package Kolekcje;
 
+import Pliki.Person;
+import Pliki.ReaderFromFIle;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Mapy {
     Map<String, Integer> mapka=new HashMap<>();
@@ -52,6 +56,18 @@ public class Mapy {
         myMap.metodyNaMapie();
         System.out.println("\n");
         myMap.petlePoMapie();
+
+        /*--------------------------Tworzenie map, gdzie klucz to nasza klasa--------------------------*/
+        //To zadziała bo klasa person implementuje interface comparable
+        //Map<Person,Integer> map=new TreeMap<>();
+
+        //To zadziała bo klasa ma nadpisane metodę .hashCode()
+        Map<Person,Integer> map=new HashMap<>();
+
+        //To zwróci błąd, ponieważ metoda ta nie nadpisanej metody .hashCode()(można ją szybko wygenerować)
+        //Map<ReaderFromFIle, Integer> map1=new HashMap<>();
+        map.put(new  Person("ala",12),12);
+        map.put(new  Person("x",0),0);
     }
 }
 
