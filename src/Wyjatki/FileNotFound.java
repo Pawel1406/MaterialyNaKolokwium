@@ -46,6 +46,26 @@ public class FileNotFound {
         sc.close();
     }
 
+    //dodawanie do listy, jeśli jakaś metoda wewnętrzna rzuca wyjątek
+    //Dodajemy do listy, tylko gdy nie ma wyjątku
+    public void loadData(String path) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(path));
+        String line;
+        //RouteRecord routeRecord;->jakieś dane
+
+        while (scanner.hasNextLine()) {
+            try {
+                line = scanner.nextLine().trim();
+               // routeRecord=RouteRecord.fromCsvLine(line, airlines);->
+               //->Jakaś metoda rzucajaca jakiś wyjątek, np. własny
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                continue;
+            }
+            //records.add(routeRecord);->dodanie do jakiejś listy
+        }
+    }
+
     static void main() {
         FileNotFound obj = new FileNotFound();
         obj.readFromFIleThird("src/Pliki/plik7.txt");//plik.txt to poprawna nazwa, reszta ścieżki jest git
