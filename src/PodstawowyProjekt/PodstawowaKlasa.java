@@ -22,6 +22,8 @@ public class PodstawowaKlasa {
         this.y = y;
         this.z = z;
     }
+    //To że mamy kilka konstruktorów, które rozpoznaje po przekazanych im argumentach nazywamy polimorfizmem statycznym
+    //Tak samo to działa, jak zrobimy metody tak samo się nazywające, ale różniące się przekazanymi argumentami.
 
     //Settery(mutatory)
     public void setX(int x) {
