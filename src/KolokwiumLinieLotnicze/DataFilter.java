@@ -21,3 +21,5 @@ public interface DataFilter <T>{
         // --- SPOSÓB B: Implementacja za pomocą Wyrażenia Lambda (Szybciej i ładniej) ---
         DataFilter<Flight> lambdaFilter = flight -> flight.getDelaysCount() > 100;
  */
+
+//Implementacja w klasie RouteRecord
