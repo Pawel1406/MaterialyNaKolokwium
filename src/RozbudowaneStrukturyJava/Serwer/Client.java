@@ -19,6 +19,9 @@ public class Client{
             String userInput;
             while ((userInput = in.readLine()) != null) {
                 out.println(userInput);
+                if(userInput.equalsIgnoreCase("/close")){
+                    return;
+                }
             }
         }
         catch (IOException e) {

@@ -46,6 +46,7 @@ public class ChatClientApp extends Application {
 
         sendButton.setOnAction(e -> sendMessage());
         messageField.setOnAction(e -> sendMessage());
+        primaryStage.setOnCloseRequest(e -> { closeButtom();});
 
 
         TextInputDialog loginDialog = new TextInputDialog("User");
@@ -95,5 +96,25 @@ public class ChatClientApp extends Application {
 
     public void removeUser(String user) {
         Platform.runLater(() -> activeUsers.remove(user));
+    }
+
+    public void closeButtom(){
+                    // 1. Odpalamy zamykanie sieci w osobnym wątku (nie zablokuje to okna)
+            new Thread(() -> {
+                try {
+                    if (connection != null) {
+                        connection.closeEverything();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    // 2. Gdy sieć się zamknie (lub rzuci błędem), bezpiecznie zabijamy proces aplikacji
+                    Platform.runLater(() -> {
+                        Platform.exit();
+                        System.exit(0);
+                    });
+                }
+            }).start();
+
     }
 }

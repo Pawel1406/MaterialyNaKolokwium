@@ -21,6 +21,7 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
+
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             login = in.readLine();
@@ -29,13 +30,20 @@ public class ClientHandler implements Runnable {
             }
             this.login = this.login.trim();
             chatServer.usersMap.put(this.login, this);
+            System.out.println("Dołączył user:  "+this.login);
             chatServer.broadcast(">>>Dolaczyl user o loginie " + this.login + "<<<", this.login);
 
             String clientMessage;
             while ((clientMessage = in.readLine()) != null) {
                 if (clientMessage.equals("/online")) {
                     this.sendMessage(chatServer.usersMap.keySet().toString());
-                } else {
+                }
+                else if (clientMessage.equals("/close")) {
+                    System.out.println("Użytkownik "+this.login+" opuścił serwer");
+                    return;
+                    //blok finally i tak się wykona
+                }
+                else {
                     System.out.println("Otrzymano od użytkownika: "+login+" wiadomość: " + clientMessage);
                     chatServer.broadcast(this.login+": "+clientMessage, this.login);
                 }

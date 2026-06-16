@@ -66,7 +66,7 @@ public class ConnectionHandler {
         }
     }
 
-    private void closeEverything() {
+     void closeEverything() {
         try {
             if (in != null) in.close();
             if (out != null) out.close();

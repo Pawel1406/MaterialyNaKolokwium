@@ -28,7 +28,7 @@ public class ChatServer {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 new Thread(new ClientHandler(clientSocket,chatServer)).start();
-                System.out.println("Dołączył klient");
+
             }
         } catch (IOException e) {
             e.getMessage();
