@@ -46,7 +46,7 @@ public class ChatClientApp extends Application {
 
         sendButton.setOnAction(e -> sendMessage());
         messageField.setOnAction(e -> sendMessage());
-        primaryStage.setOnCloseRequest(e -> { closeButtom();});
+        primaryStage.setOnCloseRequest(e ->  closeButtom());
 
 
         TextInputDialog loginDialog = new TextInputDialog("User");
