@@ -4,6 +4,7 @@ package RozbudowaneStrukturyJava.Kolokwium2025.Serwer;
 import java.sql.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Database {
@@ -71,7 +72,7 @@ public class Database {
 
     public Map<String, Integer> getLeaderboard() {
         String sql_leaderboard = "SELECT login, points FROM users ORDER BY points DESC";
-        Map<String,Integer>toReturn=new HashMap();
+        Map<String,Integer>toReturn=new LinkedHashMap<>();
         try (Connection connection = DriverManager.getConnection(URL)){
             PreparedStatement stmt_leaderboard = connection.prepareStatement(sql_leaderboard);
             ResultSet rs = stmt_leaderboard.executeQuery();
