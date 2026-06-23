@@ -1,0 +1,10 @@
+Całość można odpalać przy użyciu komendy w konsoli:
+telnet localhost nrPortu
+w naszym przypadku korzystamy z portu 12345 (bo tak), czyli komenda będzie się nazywać:
+telnet localhost 12345. (na windows)
+Klasa klienta, nie jest w pełni wymagana przez treść kolokwium.
+
+Co do pliku pom.xml w properties pojawiły się dwie dodatkowe linijki,
+jedna służącą do zdefiniowania wersji JAVAFX, druga JUnit, z którego będziemy korzystać
+
+W sekcji dependecies trzy '<dependency>'' tyczą się JAVAFX,

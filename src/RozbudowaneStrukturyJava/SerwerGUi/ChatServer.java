@@ -56,6 +56,7 @@ public class ChatServer {
                     }
                 }
             } catch (IOException e) {
+                System.err.println("Błąd połączenia");
                 e.printStackTrace();
             }
             finally {
