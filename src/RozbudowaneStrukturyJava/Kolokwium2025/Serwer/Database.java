@@ -1,9 +1,7 @@
 package RozbudowaneStrukturyJava.Kolokwium2025.Serwer;
 
-//Takie importy
 import java.sql.*;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,11 +15,14 @@ public class Database {
     public boolean authenticate(String login, String password) {
 
        String statement = "SELECT * FROM users WHERE login = ? AND password = ?";
-        try(Connection connection = DriverManager.getConnection(URL)){
+        try(Connection connection = DriverManager.getConnection(URL);
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);){
 
             //Stosujemy zawsze PreparedStatement, bo jest lepszy
-            //CHociaż w tym wypadku trzeba z niego korzystać
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+            //Chociaż w tym wypadku trzeba z niego korzystać
+            //Dajemy preparedStatement wewnątrz bloku try, żeby nie zamykać go ręcznie.
+            //Tak samo robimy z ResultSet
+
 
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
@@ -34,7 +35,6 @@ public class Database {
             System.err.println(e.getMessage());
             return false;
         }
-        //return true;
 
     }
 
@@ -48,13 +48,14 @@ public class Database {
             connection.setAutoCommit(false);
             //robimy coś takiego po to, bo robimy dwa update i nie chcemy sytuacji że jeden wynik zapiszemy a drugiego nie z powodu błędu
             //chcemy, żeby nasze operacje miały atomowy charakter
-            try{
+            try(PreparedStatement preparedStatementWinner=connection.prepareStatement(statementWinner);
+                PreparedStatement preparedStatementLoser= connection.prepareStatement(statementLoser)){
 
-            PreparedStatement preparedStatementWinner=connection.prepareStatement(statementWinner);
+
             preparedStatementWinner.setString(1, winner);
             preparedStatementWinner.executeUpdate();
 
-            PreparedStatement preparedStatementLoser= connection.prepareStatement(statementLoser);
+
             preparedStatementLoser.setString(1, loser);
             preparedStatementLoser.executeUpdate();
 
@@ -73,13 +74,14 @@ public class Database {
     public Map<String, Integer> getLeaderboard() {
         String sql_leaderboard = "SELECT login, points FROM users ORDER BY points DESC";
         Map<String,Integer>toReturn=new LinkedHashMap<>();//Musi być do poprawnej kolejności
-        try (Connection connection = DriverManager.getConnection(URL)){
-            PreparedStatement stmt_leaderboard = connection.prepareStatement(sql_leaderboard);
-            ResultSet rs = stmt_leaderboard.executeQuery();
-            while (rs.next()) {
-                String login=rs.getString("login");
-                Integer points=rs.getInt("points");
-                toReturn.put(login,points);
+        try (Connection connection = DriverManager.getConnection(URL);PreparedStatement stmt_leaderboard = connection.prepareStatement(sql_leaderboard);){
+
+            try(ResultSet rs = stmt_leaderboard.executeQuery();){
+                while (rs.next()) {
+                    String login=rs.getString("login");
+                    Integer points=rs.getInt("points");
+                    toReturn.put(login,points);
+                }
             }
         } catch (SQLException e){
             System.err.println(e.getMessage());
