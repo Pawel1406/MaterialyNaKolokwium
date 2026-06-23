@@ -72,7 +72,7 @@ public class Database {
 
     public Map<String, Integer> getLeaderboard() {
         String sql_leaderboard = "SELECT login, points FROM users ORDER BY points DESC";
-        Map<String,Integer>toReturn=new LinkedHashMap<>();
+        Map<String,Integer>toReturn=new LinkedHashMap<>();//Musi być do poprawnej kolejności
         try (Connection connection = DriverManager.getConnection(URL)){
             PreparedStatement stmt_leaderboard = connection.prepareStatement(sql_leaderboard);
             ResultSet rs = stmt_leaderboard.executeQuery();
