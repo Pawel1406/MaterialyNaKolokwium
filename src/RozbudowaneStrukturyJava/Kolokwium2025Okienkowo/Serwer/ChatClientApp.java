@@ -1,4 +1,4 @@
-package RozbudowaneStrukturyJava.Kolokwium2025.Serwer;
+package RozbudowaneStrukturyJava.Kolokwium2025Okienkowo.Serwer;
 
 
 
