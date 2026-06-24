@@ -80,8 +80,10 @@ public class Serwer {
 
             challengee.inTournament=false;
             challenger.inTournament=false;
-            challenger.printResult(database.getLeaderboard());
-            challengee.printResult(database.getLeaderboard());
+
+
+           challenger.printResult(database.getLeaderboard());
+           challengee.printResult(database.getLeaderboard());
         });
 
         challenger.sendMessage("Rozpoczeto pojedynek!!!");
@@ -136,7 +138,6 @@ public class Serwer {
                             serwer.clients.add(this);
                             out.println("Udalo sie pomyslnie polaczyc z baza danych");
                             serwer.broadcast(this.username+ " dołączył do serwera",this.username);
-                            sendActiveUsers();//potrzebne, żeby mieć listę user
                         }
                         else{
                             out.println("Blad autentykacji");
@@ -194,18 +195,8 @@ public class Serwer {
             }
         }
 
-        public void sendActiveUsers(){
-            serwer.broadcast("AKTYWNI GRACZE",null);
-            StringBuilder sb=new StringBuilder();
 
 
-            for (ClientHandler client : serwer.clients) {
-                sb.append(client.username);
-                sb.append("\n");
-            }
-            sb.append("END");
-            serwer.broadcast(sb.toString(),null);
 
-        }
     }
 }
