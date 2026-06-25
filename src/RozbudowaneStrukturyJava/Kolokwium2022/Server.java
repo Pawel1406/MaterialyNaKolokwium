@@ -33,6 +33,8 @@ public class Server extends Thread {
         }, 0, 1000);
     }
 
+
+    //serwer obsługujący wielu klientów, ale jednego jednoczęśnie
     public void run(){
         while(true){
             Socket clientSocket;

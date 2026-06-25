@@ -59,7 +59,7 @@ public class Serwer {
                 }
             }
         }
-        challenger.out.println("Nie ma takiego czlowieka: "+challengeeLogin);
+        challenger.sendMessage("Nie ma takiego czlowieka: "+challengeeLogin);
     }
     private void startDuel(ClientHandler challenger, ClientHandler challengee){
         Duel duel=new Duel(challenger,challengee);
@@ -93,7 +93,7 @@ public class Serwer {
     public  void broadcast(String input, String username){
         for (ClientHandler client : this.clients) {
             if (client.username.equals(username)) continue;
-            client.out.println(input);
+            client.sendMessage(input);
             //To jest dobry moment na zastanowienie się, kiedy stosować pętlę fori,a kiedy for
             //Algorytmicznie nie ma to większego znaczenia, o ile korzystamy z rozbudowanych struktur jak listy
             //Ale dla czytelności kodu byłoby okropne zastosowanie tutaj fori
@@ -123,23 +123,23 @@ public class Serwer {
                 out = new PrintWriter(socket.getOutputStream(), true);
 
                 String input;
-                out.println("Podaj login: ");
+                sendMessage("Podaj login: ");
                 while ((input = in.readLine()) != null) {
                     input=input.trim();
                     if(username == null){
-                        out.println("Podaj haslo: ");
+                        sendMessage("Podaj haslo: ");
                         String password=in.readLine();
                         password=password.trim();
-                        out.println("Trwa autentykacja...........");
+                        sendMessage("Trwa autentykacja...........");
                         if(serwer.database.authenticate(input,password)) {
                             this.username = input;
                             serwer.clients.add(this);
-                            out.println("Udalo sie pomyslnie polaczyc z baza danych");
+                            sendMessage("Udalo sie pomyslnie polaczyc z baza danych");
                             serwer.broadcast(this.username+ " dołączył do serwera",this.username);
                             sendActiveUsers();//potrzebne, żeby mieć listę user
                         }
                         else{
-                            out.println("Blad autentykacji");
+                            sendMessage("Blad autentykacji");
                             break;
                         }
                     }
@@ -147,7 +147,7 @@ public class Serwer {
                         if(input.equals("p")||input.equals("r")||input.equals("s")){
                             makeGesture(Gesture.fromString(input));
                         }
-                        else out.println("Niedozwolona komenda: "+input);
+                        else sendMessage("Niedozwolona komenda: "+input);
 
 
                     }
@@ -170,7 +170,6 @@ public class Serwer {
 
         }
 
-
         public void sendMessage(String message){
             this.out.println(message);
         }
@@ -185,25 +184,16 @@ public class Serwer {
                 e.printStackTrace();
             }
         }
-        public void printResult(Map<String,Integer> leaderboard){
-            out.println("WYNIK:");
-            out.println("login:points");
-            out.println("________");
-            for (Map.Entry<String, Integer> stringIntegerEntry : leaderboard.entrySet()) {
-                out.println(stringIntegerEntry.getKey() + ":" + stringIntegerEntry.getValue());
-            }
-        }
 
         private  void printAllUsersResult(Map<String,Integer> leaderboard){
             for (ClientHandler client : serwer.clients) {
-                client.out.println("WYNIK:");
-                client.out.println("login:points");
-                client.out.println("________");
+                client.sendMessage("WYNIK:");
+                client.sendMessage("login:points");
+                client.sendMessage("________");
                 for (Map.Entry<String, Integer> stringIntegerEntry : leaderboard.entrySet()) {
-                    client.out.println(stringIntegerEntry.getKey() + ":" + stringIntegerEntry.getValue());
+                    client.sendMessage(stringIntegerEntry.getKey() + ":" + stringIntegerEntry.getValue());
                 }
             }
-
         }
 
         public void sendActiveUsers(){

@@ -57,8 +57,12 @@ public class ClientControler {
             });
         });
 
+
+
         new Thread(this::connectToServer).start();
     }
+
+
 
     private void connectToServer(){
         try(Socket socket=new Socket("localhost",12345)){
@@ -68,7 +72,7 @@ public class ClientControler {
                 Word word=new Word(line);
                 Platform.runLater(()->{
                     observableList.add(word.toString());
-                    wordCountLabel.setText("Ilość słów: "+observableList.size());
+                    wordCountLabel.setText(""+observableList.size());
                 });
             }
         }

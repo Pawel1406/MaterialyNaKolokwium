@@ -62,8 +62,21 @@ public class ChatServer {
             finally {
                 if (username != null) {
                     clients.remove(username);
+                    closeEverything();
                     broadcast("/logout " + username);
                 }
+            }
+        }
+
+        private void closeEverything() {
+            try{
+                if(in != null){ in.close(); }
+                if(out != null){ out.close(); }
+                if(socket != null){ socket.close(); }
+
+            }
+            catch (IOException e){
+                System.err.println(e.getMessage());
             }
         }
 
