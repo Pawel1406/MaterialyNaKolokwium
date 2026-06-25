@@ -1,8 +1,6 @@
 package RozbudowaneStrukturyJava.SQLLite;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -106,6 +104,8 @@ public class Database {
                     points INTEGER DEFAULT 0
                 );
                 """;
+
+
 
         try (Connection connection = DriverManager.getConnection(URL);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);){
