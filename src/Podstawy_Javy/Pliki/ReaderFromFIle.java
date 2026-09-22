@@ -2,9 +2,14 @@ package Podstawy_Javy.Pliki;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ReaderFromFIle {
     List<Person> lista=new ArrayList<>();
@@ -33,6 +38,20 @@ public class ReaderFromFIle {
         String [] parts=line.trim().split(" ");//.trim() usuwa białe znaki, split zwraca tablicę string podzieloną na podstawie regexu
         return new Person(parts[0],Integer.parseInt(parts[1]));
         //Integer.parseInt() zamienia string na int
+    }
+
+
+    /*--------------------------Metoda wykorzystująca strumienie do zapisu--------------------------*/
+    public List<Person >fromCSVUsingStreamAPI(String path) throws IOException {
+        return Files.readAllLines(Paths.get(path)).stream()
+                .map(this::fromCsvLine)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void toCSVUsingStreamAPI(List<Person>lista, String path) throws IOException {
+       Files.write(Paths.get(path),lista.stream().map(Person::toString).collect(Collectors.toCollection(ArrayList::new)));
+
+
     }
 
     public static void main()  {
