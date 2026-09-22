@@ -41,13 +41,14 @@ public class ReaderFromFIle {
     }
 
 
-    /*--------------------------Metoda wykorzystująca strumienie do zapisu--------------------------*/
+    /*--------------------------Metoda wykorzystująca strumienie do odczytu--------------------------*/
     public List<Person >fromCSVUsingStreamAPI(String path) throws IOException {
         return Files.readAllLines(Paths.get(path)).stream()
                 .map(this::fromCsvLine)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /*--------------------------Metoda wykorzystująca strumienie do zapisu--------------------------*/
     public void toCSVUsingStreamAPI(List<Person>lista, String path) throws IOException {
        Files.write(Paths.get(path),lista.stream().map(Person::toString).collect(Collectors.toCollection(ArrayList::new)));
 
