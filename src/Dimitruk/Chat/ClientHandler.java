@@ -1,10 +1,12 @@
+//wielowątkowe
 package Dimitruk.Chat;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class ClientHandler implements Runnable {
+public class
+ClientHandler implements Runnable {
     private final Socket socket;
     private final BufferedReader reader;
     private final PrintWriter writer;
