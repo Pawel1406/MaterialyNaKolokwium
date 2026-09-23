@@ -173,6 +173,9 @@ public class Serwer {
             this.out.println(message);
         }
         private void closeEverything(){
+
+            //albo wszystko ręcznie zamykasz, albo używając try with resources
+            //(wtedy automatycznie się to dzieje wszystko)
             try {
                 if(socket!=null) socket.close();
                 if(in!=null) in.close();
