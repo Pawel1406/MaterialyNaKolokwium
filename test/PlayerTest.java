@@ -1,6 +1,6 @@
-import RozbudowaneStrukturyJava.Kolokwium2025.Game.Duel;
-import RozbudowaneStrukturyJava.Kolokwium2025.Game.Gesture;
-import RozbudowaneStrukturyJava.Kolokwium2025.Game.Player;
+import RozbudowaneStrukturyJava.SerweryWielowatkowe.Kolokwium2025.Game.Duel;
+import RozbudowaneStrukturyJava.SerweryWielowatkowe.Kolokwium2025.Game.Gesture;
+import RozbudowaneStrukturyJava.SerweryWielowatkowe.Kolokwium2025.Game.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
